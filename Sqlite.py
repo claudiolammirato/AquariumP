@@ -60,7 +60,7 @@ def update_item():
 
     conn.execute("UPDATE COMPANY set SALARY = 25000.00 where ID = 1")
     conn.commit()
-    print )"Total number of rows updated :"), conn.total_changes
+    print ("Total number of rows updated :"), conn.total_changes
 
     cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
     for row in cursor:
