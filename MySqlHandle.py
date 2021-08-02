@@ -22,6 +22,7 @@ def close():
 
 
 def createTable():
+    connection()
     DB_NAME = Pass.database
 
     TABLES = {}
@@ -39,7 +40,7 @@ def createTable():
     try:
         print("Creating table {}: ".format('employees'), end='')
         cursor.execute(TABLES['employees'])
-    except mysql.connector.Error as err:
+    except mysql.Error as err:
         if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
             print("already exists.")
         else:
@@ -48,9 +49,10 @@ def createTable():
         print("OK")
 
     cursor.close()
-    connection.db.close()
+    close()
 
 def addItem():
+    connection()
     cursor = connection.db.cursor()
     tomorrow = datetime.now().date() + timedelta(days=1)
     add_employee = ("INSERT INTO employees "
@@ -66,8 +68,11 @@ def addItem():
     connection.db.commit()
 
     cursor.close()
+    close()
     
 def retrieveData():
+    connection()
+
     cursor = connection.db.cursor()
 
     query = ("SELECT first_name, last_name, hire_date FROM employees "
@@ -83,3 +88,5 @@ def retrieveData():
             last_name, first_name, hire_date))
 
     cursor.close()
+    close()
+
