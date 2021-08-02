@@ -1,4 +1,4 @@
-from aquarium import grafica
+from graphic import grafica
 
 
 def main():
